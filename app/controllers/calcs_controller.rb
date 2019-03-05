@@ -14,5 +14,4 @@ class CalcsController < ApplicationController
     else
     end
   end
-  
 end
