@@ -8,15 +8,20 @@ module Common
         @answer = @int_first - @int_second
       elsif @arithmetic == "multiplication"
         @answer = @int_first * @int_second
-      elsif @arithmetic == "division" && @int_second == 0 
-        @answer = "divided by 0"
-      elsif @arithmetic == "division" && (@int_first % @int_second) != 0
-        @answer = "#{@int_first / @int_second}..#{@int_first % @int_second}"
       elsif @arithmetic == "division"
-        @answer = @int_first / @int_second
+          begin
+            if 0 != @int_first % @int_second 
+              @answer = "#{@int_first / @int_second}..#{@int_first % @int_second}"
+              # あまりが0ではないときにこの@answerを表示
+            else
+              @answer = @int_first / @int_second
+              # あまりが0のときにこのanswerを表示
+            end
+          rescue ZeroDivisionError => ex
+            @answer = ex.message
+          end
       else
       end
     end
   end
 end
-
