@@ -3,13 +3,14 @@ class CalcsController < ApplicationController
     int_first = params[:int_first].to_i
     arithmetic = params[:arithmetic]
     int_second = params[:int_second].to_i
-    if arithmetic == "addition"
+    case arithmetic
+    when "addition" then
       @answer = int_first + int_second
-    elsif arithmetic == "subtraction"
+    when "subtraction" then
       @answer = int_first - int_second
-    elsif arithmetic == "multiplication"
+    when "multiplication" then
       @answer = int_first * int_second
-    elsif arithmetic == "division"
+    when "division" then
       @answer = int_first / int_second
     else
     end
