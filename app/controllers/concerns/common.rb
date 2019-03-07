@@ -2,21 +2,16 @@ module Common
   extend ActiveSupport::Concern
   included do
     def calculation
-      if @arithmetic == "addition"
+      case @arithmetic
+      when "addition" then
         @answer = @int_first + @int_second
-      elsif @arithmetic == "subtraction"
+      when "subtraction" then
         @answer = @int_first - @int_second
-      elsif @arithmetic == "multiplication"
+      when "multiplication" then
         @answer = @int_first * @int_second
-      elsif @arithmetic == "division"
-          begin
-            if 0 != @int_first % @int_second 
-              @answer = "#{@int_first / @int_second}..#{@int_first % @int_second}"
-              # あまりが0ではないときにこの@answerを表示
-            else
-              @answer = @int_first / @int_second
-              # あまりが0のときにこのanswerを表示
-            end
+      when "division" then
+          begin 
+            @answer = "#{@int_first / @int_second}..#{@int_first % @int_second}"
           rescue ZeroDivisionError => ex
             @answer = ex.message
           end
