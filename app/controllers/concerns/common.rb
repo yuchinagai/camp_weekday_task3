@@ -2,18 +2,18 @@ module Common
   extend ActiveSupport::Concern
   included do
     def calculation
-      case @arithmetic
-      when "addition" then
-        @answer = @int_first + @int_second
-      when "subtraction" then
-        @answer = @int_first - @int_second
-      when "multiplication" then
-        @answer = @int_first * @int_second
-      when "division" then
+      @answer = case @arithmetic
+                when "addition"
+                  @int_first + @int_second
+                when "subtraction"
+                  @int_first - @int_second
+                when "multiplication"
+                  @int_first * @int_second
+                when "division"
           begin 
-            @answer = "#{@int_first / @int_second}..#{@int_first % @int_second}"
+            "#{@int_first / @int_second}..#{@int_first % @int_second}"
           rescue ZeroDivisionError => ex
-            @answer = ex.message
+            ex.message
           end
       else
       end
